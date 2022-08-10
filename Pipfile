@@ -15,6 +15,7 @@ pytest = "*"
 yamllint = "*"
 twine = "*"
 python-dotenv = "*"
+isort = "*"
 
 [packages]
 requests = "*"
