@@ -1,7 +1,7 @@
 Octo Pipeline
 =================================
 
-![build workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+[![Python package](https://github.com/ofiriluz/octo-pipeline-python/actions/workflows/build.yml/badge.svg)](https://github.com/ofiriluz/octo-pipeline-python/actions/workflows/build.yml)
 
 
 The Octo pipeline gives the ability to work both with an actual pipeline such as jenkins / github actions etc
