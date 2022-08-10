@@ -1,6 +1,9 @@
 Octo Pipeline
 =================================
 
+![build workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+
+
 The Octo pipeline gives the ability to work both with an actual pipeline such as jenkins / github actions etc
 and locally on a machine
 
