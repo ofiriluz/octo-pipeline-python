@@ -1,6 +1,9 @@
 Octo Pipeline
 =================================
 
+[![Python package](https://github.com/ofiriluz/octo-pipeline-python/actions/workflows/build.yml/badge.svg)](https://github.com/ofiriluz/octo-pipeline-python/actions/workflows/build.yml)
+
+
 The Octo pipeline gives the ability to work both with an actual pipeline such as jenkins / github actions etc
 and locally on a machine
 
