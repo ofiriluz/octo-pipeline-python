@@ -1,0 +1,50 @@
+name: octo-repo-cpp
+version: 1.0.0
+scm: git@github.com
+maintainers: octo
+pipeline:
+  - lint-checks:
+      backend: clang
+      surroundings:
+        - jenkins
+        - local
+  - code-checks:
+      backend: cppcheck
+      surroundings:
+        - jenkins
+        - local
+  - consume:
+      backend: conan
+      surroundings:
+        - jenkins
+        - local
+  - build:
+      backend: conan
+      surroundings:
+        - jenkins
+        - local
+  - unittests:
+      backend: conan
+      surroundings:
+        - jenkins
+        - local
+ - security-checks:
+     surroundings:
+       - blackduck
+     surroundings:
+       - jenkins
+       - on-demand
+  - package:
+      backend: conan
+      surroundings:
+        - jenkins
+        - on-demand
+ - e2e:
+     backend: pytest
+     surroundings:
+       - jenkins
+       - on-demand
+ - deploy:
+     backend: conan
+     surroundings:
+       - jenkins

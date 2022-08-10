@@ -1,0 +1,7 @@
+conan:
+  artifactory: https://jfrog.com
+  actions:
+    build:
+      platform: linux
+      settings:
+        DISABLE_FFMPEG: ON
