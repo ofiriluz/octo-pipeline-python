@@ -75,10 +75,10 @@ build: test isort
 
 publish:
 	@echo Release to pypi.org and create git tag
-	pipenv run twine upload dist/*
-	for pkg in $$(find backends_dist/* -iname "*.whl"); do pipenv run twine upload $$pkg; done
-	git tag -a $(VERSION) -m "Version $(VERSION)"
-	git push --tags
+	pipenv run twine upload -r testpypi dist/*
+	# for pkg in $$(find backends_dist/* -iname "*.whl"); do pipenv run twine upload -r testpypi $$pkg; done
+	# git tag -a $(VERSION) -m "Version $(VERSION)"
+	# git push --tags
 
 run:
 	@echo Execute octo-pipeline-python directly

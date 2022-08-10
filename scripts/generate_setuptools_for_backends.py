@@ -77,7 +77,7 @@ def get_version(root_dir: str) -> str:
     version = open(os.path.join(root_dir, "VERSION"), 'r').read().strip()
     build_number = os.getenv("BUILD_NUMBER", 0)
     branch = os.getenv("BRANCH_NAME", "")
-    full_version = f"{version}.{build_number}"
+    full_version = f"{version}"
     if branch != "":
         if branch.startswith("rc"):
             full_version = f"{version}.rc{build_number}"

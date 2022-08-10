@@ -56,11 +56,11 @@ def get_version():
     version = open("VERSION", 'r').read().strip()
     build_number = getenv("BUILD_NUMBER", 0)
     branch = getenv("BRANCH_NAME", "")
-    full_version = f"{version}.{build_number}"
+    full_version = f"{version}"
     if branch != "":
         if branch.startswith("rc"):
             full_version = f"{version}.rc{build_number}"
-        elif branch != 'master' and not branch.startswith('release'):
+        elif branch != 'main' and not branch.startswith('release'):
             full_version = f"{version}.dev{build_number}"
     return full_version
 
@@ -108,14 +108,16 @@ setup(
     author_email='ofir.iluz@cyberark.com',
     url='https://github.com/ofiriluz/octo-pipeline-python',
     # Detailed description
-    description='',
+    description='Octo pipeline',
     long_description=long_description,
     long_description_content_type='text/markdown',
     classifiers=[
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8'
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10'
     ],
     # Package configuration
     packages=find_packages(exclude=('tests', *get_backends_exclude(),)),
