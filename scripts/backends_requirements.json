@@ -1,0 +1,75 @@
+{
+    "ansible": {
+        "include": ["ansible", "ansible-lint"],
+        "tags": ["orchestration"]
+    },
+    "blackduck": {
+        "include": ["blackduck"],
+        "tags": ["security", "cpp"]
+    },
+    "cdk": {
+        "include": ["docker", "python-dotenv", "boto3"],
+        "tags": ["python", "service"]
+    },
+    "cfn-nag": {
+        "data": ["profiles/*.profile"],
+        "tags": ["security", "python", "service"]
+    },
+    "clang": {
+        "tags": ["cpp"]
+    },
+    "conan": {
+        "include": ["conan"],
+        "tags": ["cpp"]
+    },
+    "cppcheck": {
+        "tags": ["cpp"]
+    },
+    "docker": {
+        "include": ["docker"],
+        "tags": ["containers"]
+    },
+    "file": {
+        "tags": ["common"]
+    },
+    "git": {
+        "include": ["GitPython"],
+        "tags": ["source"]
+    },
+    "golang": {
+        "tags": ["go"]
+    },
+    "gpg": {
+        "include": ["python-gnupg"],
+        "tags": ["common", "security"]
+    },
+    "perl": {
+        "tags": ["shell"]
+    },
+    "pipenv": {
+        "include": ["pipenv"],
+        "tags": ["python", "service"]
+    },
+    "pytest": {
+        "include": ["pytest", "pytest-cov", "pytest-html"],
+        "tags": ["python", "service", "tests"]
+    },
+    "setuptools": {
+        "include": ["setuptools"],
+        "tags": ["cpp", "python", "service"]
+    },
+    "s3": {
+        "include": ["boto3"],
+        "tags": ["data", "aws"]
+    },
+    "snyk": {
+        "tags": ["security", "python", "service"]
+    },
+    "tar": {
+        "tags": ["common"]
+    },
+    "yaml": {
+        "include": ["yamllint"],
+        "tags": ["orchestration"]
+    }
+}

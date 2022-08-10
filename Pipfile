@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pipreqs = "*"
+blackduck = "*"
+ansible-lint = "*"
+docker = "*"
+boto3 = "*"
+conan = "*"
+python-gnupg = "*"
+pytest = "*"
+yamllint = "*"
+twine = "*"
+python-dotenv = "*"
+
+[packages]
+requests = "*"
+colorama = "*"
+pydantic = "*"
+packaging = "*"
+argcomplete = "*"
+GitPython = "*"
+pyyaml = "*"
+toml = "*"
+overrides = "*"
+networkx = "*"
+keyring = "*"
+"keyrings.cryptfile" = "*"
+
+[requires]
+python_version = "3.8"

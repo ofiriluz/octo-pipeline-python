@@ -1,0 +1,14 @@
+name: coolspace
+scm: git@github.com
+organizations:
+  - coolorg
+workspace:
+  - 3rdparties:
+    - curlpp
+    - nlohmann-json
+    - stduuid
+    - aws-sdk-cpp
+  - core:
+    - graphics
+    - logger
+```
