@@ -161,9 +161,9 @@ Once the pipeline is installed, you can either clone a repository of an existing
 
 Or u can use the pipeline to help you out
 
-For example, if you wish to work "rdp-recording-cpp" existing pipeline, you could perform the following command
+For example, if you wish to work "curlpp" existing pipeline, you could perform the following command
 ```shell
-octo pipeline init --org=pas --name=rdp-recording-cpp
+octo pipeline init --org=pas --name=curlpp
 ```
 The above will try and find inside pas organization the repository, check if it has a pipeline and clone it accordingly
 
