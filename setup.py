@@ -105,7 +105,7 @@ setup(
     version=get_version(),
     # Authorship and online reference
     author='Ofir Iluz',
-    author_email='ofir.iluz@cyberark.com',
+    author_email='iluzofir@gmail.com',
     url='https://github.com/ofiriluz/octo-pipeline-python',
     # Detailed description
     description='Octo pipeline',
@@ -126,7 +126,7 @@ setup(
     install_requires=get_install_requirements(),
     extras_require=get_backends_extras(),
     # Licensing and copyright
-    license='Apache 2.0',
+    license='MIT',
     entry_points={
         'console_scripts': ['octo=octo_pipeline_python.octo:main'],
     }

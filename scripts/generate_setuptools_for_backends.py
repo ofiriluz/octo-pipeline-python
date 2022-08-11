@@ -62,13 +62,15 @@ setup(
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8'
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10'
     ],
     packages=(f"octo_pipeline_python.backends.{code_backend}", *packages),
     include_package_data=True,
     python_requires='>= 3.8',
     install_requires={requirements},
-    license='Apache 2.0'
+    license='MIT'
 )
 """
 
