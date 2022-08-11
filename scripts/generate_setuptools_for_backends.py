@@ -55,7 +55,7 @@ setup(
     name='octo-pipeline-backend-{backend}-python',
     version='{version}',
     author='Ofir Iluz',
-    author_email='ofir.iluz@cyberark.com',
+    author_email='iluzofir@gmail.com',
     url='https://github.com/ofiriluz/octo-pipeline-python',
     description='{backend} backend implementation for octo-pipeline',
     classifiers=[

@@ -23,7 +23,7 @@ class PipelineCommand(Command):
         init_pipeline.add_argument("--org", help="Which organization to look for the pipeline repo", required=True)
         init_pipeline.add_argument("--name", help="Name of the pipeline", required=True)
         init_pipeline.add_argument("--head", help="Branch of the pipeline", default="master")
-        init_pipeline.add_argument("--scm", help="Base SCM to go to look on", default="https://github.cyberng.com")
+        init_pipeline.add_argument("--scm", help="Base SCM to go to look on", default="https://github.com")
         execute_parser = pipeline_subparsers.add_parser("execute", help="Executes the entire pipeline actions")
         execute_parser.add_argument("--reset-cache", help="Resets the cache and starts the pipeline from the beginning",
                                     action="store_true")

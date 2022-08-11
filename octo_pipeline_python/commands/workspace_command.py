@@ -185,7 +185,7 @@ class WorkspaceCommand(Command):
         init_pipeline.add_argument("--org", help="Which organization to look for the pipeline repo", required=True)
         init_pipeline.add_argument("--name", help="Name of the pipeline", required=True)
         init_pipeline.add_argument("--head", help="Branch of the pipeline", default="master")
-        init_pipeline.add_argument("--scm", help="Base SCM to go to look on", default="https://github.cyberng.com")
+        init_pipeline.add_argument("--scm", help="Base SCM to go to look on", default="https://github.com")
         init_pipeline.add_argument("--no-sync", help="Do not sync the workspace after cloning", action="store_true")
         init_pipeline.add_argument("--workspace-dir", help="A new folder name to create the new workspace in",
                                    default=".")

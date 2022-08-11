@@ -154,7 +154,7 @@ class CDKBuild(Action):
         strip_exclude: str = CDKBuild.__get_strip_exclude(cdk_args.strip_exclude_list)
         command: str = f"/bin/sh -c 'echo \"{art_ip} artifactory\" >> /etc/hosts && " \
                        "python3.8 -m pip install --trusted-host artifactory " \
-                       "--trusted-host=artifactory.cyberng.com --target /var/task/" \
+                       "--trusted-host=artifactory.com --target /var/task/" \
                        " --requirement /root/cdk_requirements.txt && " \
                        f"find /var/task -name \\*.so {strip_exclude} " \
                        "-exec strip \\{\\} \\;'"

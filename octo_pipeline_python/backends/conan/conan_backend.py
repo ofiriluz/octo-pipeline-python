@@ -142,9 +142,10 @@ class ConanBackend(Backend):
         remote_list = [remote.name for remote in conan_client.remote_list()]
         artifactory = ConanBackend.__get_artifactory_url(conan_pipeline_args, conan_workspace_args)
         # Remove conan center if it doesnt exist
-        for denied_remote in ["conancenter", "conan-center"]:
-            if denied_remote in remote_list:
-                conan_client.remote_remove(denied_remote)
+        if conan_pipeline_args.no_default_remotes or conan_workspace_args.no_default_remotes:
+            for denied_remote in ["conancenter", "conan-center"]:
+                if denied_remote in remote_list:
+                    conan_client.remote_remove(denied_remote)
         # Add the remotes
         for remote in ConanBackend.__get_remotes(conan_pipeline_args, conan_workspace_args):
             if remote not in remote_list:
