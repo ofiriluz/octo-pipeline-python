@@ -85,12 +85,14 @@ class AnsiblePlay(Action):
                         "ansible_ssh_password": ansible_args.remote_password,
                     })
             if ansible_args.extra_vars:
+                if isinstance(ansible_args.extra_vars, str):
+                    ansible_args.extra_vars = {v.split('=')[0].strip(): v.split('=')[1].strip() for v in ansible_args.extra_vars.split()}
                 extra_vars.update(ansible_args.extra_vars)
             logger.info(f"Using extra vars [{extra_vars.keys()}]")
             if ansible_args.inventory:
                 extra_vars_str = ' '.join([f"{k}={str(v)}" for k, v in extra_vars.items()])
                 inventory_path = ansible_args.inventory
-            else:
+            elif ansible_args.hosts:
                 hosts = '\n'.join(ansible_args.hosts)
                 extra_vars_str = '\n'.join([f"{k}={str(v)}" for k, v in extra_vars.items()])
                 with open(temp_inventory_file, "w") as f:

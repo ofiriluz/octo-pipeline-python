@@ -1,4 +1,4 @@
-name: Python package
+name: Octo Build Pipeline
 
 on: [push]
 
