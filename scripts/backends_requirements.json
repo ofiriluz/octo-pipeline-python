@@ -1,6 +1,6 @@
 {
     "ansible": {
-        "include": ["ansible", "ansible-lint"],
+        "include": ["ansible-lint"],
         "tags": ["orchestration"]
     },
     "blackduck": {

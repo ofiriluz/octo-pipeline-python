@@ -89,8 +89,8 @@ class AnsiblePlay(Action):
                     ansible_args.extra_vars = {v.split('=')[0].strip(): v.split('=')[1].strip() for v in ansible_args.extra_vars.split()}
                 extra_vars.update(ansible_args.extra_vars)
             logger.info(f"Using extra vars [{extra_vars.keys()}]")
+            extra_vars_str = ' '.join([f"{k}={str(v)}" for k, v in extra_vars.items()])
             if ansible_args.inventory:
-                extra_vars_str = ' '.join([f"{k}={str(v)}" for k, v in extra_vars.items()])
                 inventory_path = ansible_args.inventory
             elif ansible_args.hosts:
                 hosts = '\n'.join(ansible_args.hosts)
@@ -105,10 +105,13 @@ class AnsiblePlay(Action):
             for playbook in ansible_args.playbooks:
                 while retry_count > 0:
                     if ansible_args.inventory:
-                        p = pipeline_context.run_contextual(f"ansible-playbook -i {inventory_path} --extra-vars={extra_vars_str} {playbook}",
+                        p = pipeline_context.run_contextual(f"ansible-playbook -i {inventory_path} --extra-vars=\"{extra_vars_str}\" {playbook}",
+                                                            universal_newlines=True, stdout=subprocess.PIPE)
+                    elif ansible_args.hosts:
+                        p = pipeline_context.run_contextual(f"ansible-playbook -i {inventory_path} {playbook}",
                                                             universal_newlines=True, stdout=subprocess.PIPE)
                     else:
-                        p = pipeline_context.run_contextual(f"ansible-playbook -i {inventory_path} {playbook}",
+                        p = pipeline_context.run_contextual(f"ansible-playbook --extra-vars=\"{extra_vars_str}\" {playbook}",
                                                             universal_newlines=True, stdout=subprocess.PIPE)
                     for stdout_line in iter(p.stdout.readline, ""):
                         if stdout_line.strip():
@@ -121,7 +124,7 @@ class AnsiblePlay(Action):
                     break
             if retry_count <= 0:
                 return ActionResult(action_type=self.action_type,
-                                    result=[f"Failed to run ansible playbook [{results}]"],
+                                    result=[f"Failed to run ansible playbook [{return_code}]"],
                                     result_code=ActionResultCode.FAILURE)
             return ActionResult(action_type=self.action_type,
                                 result=[],
