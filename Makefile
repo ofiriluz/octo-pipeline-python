@@ -18,7 +18,7 @@ export LANG = C.UTF-8
 # Set configuration folder to venv
 export PYPE_CONFIG_FOLDER = $(shell pwd)/.venv/.pype-cli
 # Process variables
-VERSION = $(shell python3 setup.py --version)
+VERSION := $(shell cat VERSION)
 PY_FILES := setup.py octo_pipeline_python tests
 
 all: venv build
@@ -75,8 +75,8 @@ build: test isort
 
 publish:
 	@echo Release to pypi.org and create git tag
-	pipenv run twine upload dist/*
-	for pkg in $$(find backends_dist/* -iname "*.whl"); do pipenv run twine upload $$pkg; done
+	pipenv run twine upload --skip-existing dist/*
+	for pkg in $$(find backends_dist/* -iname "*.whl"); do pipenv run twine --skip-existing upload $$pkg; done
 	git tag -a $(VERSION) -m "Version $(VERSION)"
 	git push --tags
 
