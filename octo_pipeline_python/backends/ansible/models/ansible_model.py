@@ -17,3 +17,4 @@ class AnsibleModel(BaseModel):
     connection: str = Field(description="Ansible connection type", default="ssh")
     timeout: int = Field(description="Command timeout", default=360)
     retry_count: int = Field(description="Playbook failure retry count", default=1)
+    collections: Optional[List[str]] = Field(description='Collections to install via galaxy')

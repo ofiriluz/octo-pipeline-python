@@ -45,6 +45,18 @@ class AnsiblePlay(Action):
                                                           action_name)
         logger.info(f"[{pipeline_context.name}][{backend.backend_name()}] "
                     f"Running play action")
+        if ansible_args.collections:
+            p = pipeline_context.run_contextual(f'ansible-galaxy collection install {" ".join(ansible_args.collections)}',
+                                                universal_newlines=True, stdout=subprocess.PIPE)
+            for stdout_line in iter(p.stdout.readline, ""):
+                if stdout_line.strip():
+                    logger.info(stdout_line.strip())
+            p.stdout.close()
+            return_code = p.wait()
+            if return_code != 0:
+                return ActionResult(action_type=self.action_type,
+                                    result=[f"Failed to run ansible playbook galaxy install [{return_code}]"],
+                                    result_code=ActionResultCode.FAILURE)
         temp_folder = tempfile.gettempdir()
         temp_inventory_file = os.path.join(temp_folder, f"{str(uuid.uuid4())}.ini")
         inventory_path = temp_inventory_file
