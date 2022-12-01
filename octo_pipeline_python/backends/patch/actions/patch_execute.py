@@ -7,7 +7,8 @@ from typing import Final, List, Optional, Union
 from overrides import overrides
 
 from octo_pipeline_python.actions.action import Action, ActionType
-from octo_pipeline_python.actions.action_result import ActionResult, ActionResultCode
+from octo_pipeline_python.actions.action_result import (ActionResult,
+                                                        ActionResultCode)
 from octo_pipeline_python.backends.backend import Backend
 from octo_pipeline_python.backends.backends_context import BackendsContext
 from octo_pipeline_python.backends.patch.models import PatchModel

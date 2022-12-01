@@ -4,8 +4,10 @@ from typing import Optional
 from octo_pipeline_python.actions.action_result import ActionResultCode
 from octo_pipeline_python.actions.action_type import ActionType
 from octo_pipeline_python.backends.backend import Backend
-from octo_pipeline_python.backends.backend_auth_details import BackendAuthDetails
-from octo_pipeline_python.backends.backend_description import BackendDescription
+from octo_pipeline_python.backends.backend_auth_details import \
+    BackendAuthDetails
+from octo_pipeline_python.backends.backend_description import \
+    BackendDescription
 from octo_pipeline_python.backends.backends_context import BackendsContext
 from octo_pipeline_python.backends.patch.actions import PatchExecute
 from octo_pipeline_python.backends.patch.models import PatchModel
