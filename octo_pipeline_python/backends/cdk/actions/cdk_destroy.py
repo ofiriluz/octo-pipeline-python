@@ -1,7 +1,5 @@
 from typing import Optional
 
-from octo_pipeline_python.utils.logger import logger
-
 from octo_pipeline_python.actions.action import Action, ActionType
 from octo_pipeline_python.actions.action_result import (ActionResult,
                                                         ActionResultCode)
@@ -10,6 +8,7 @@ from octo_pipeline_python.backends.backends_context import BackendsContext
 from octo_pipeline_python.backends.cdk.common.cdk_env import CDKEnv
 from octo_pipeline_python.backends.cdk.models import CDKModel
 from octo_pipeline_python.pipeline.pipeline_context import PipelineContext
+from octo_pipeline_python.utils.logger import logger
 from octo_pipeline_python.workspace.workspace_context import WorkspaceContext
 
 

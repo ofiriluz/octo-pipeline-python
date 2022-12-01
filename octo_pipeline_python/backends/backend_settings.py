@@ -63,9 +63,12 @@ class BackendSettings(BaseModel):
                     backend: str,
                     key: str,
                     value: Any) -> bool:
-        from octo_pipeline_python.backends.backends_context import BackendsContext
-        from octo_pipeline_python.pipeline.pipeline_context import PipelineContext
-        from octo_pipeline_python.workspace.workspace_context import WorkspaceContext
+        from octo_pipeline_python.backends.backends_context import \
+            BackendsContext
+        from octo_pipeline_python.pipeline.pipeline_context import \
+            PipelineContext
+        from octo_pipeline_python.workspace.workspace_context import \
+            WorkspaceContext
         settings_path = pipeline_context.settings_path
         if not settings_path:
             settings_path = Search.search_by_name(SETTINGS_FILE_NAME, extra_search_paths=[pipeline_context.source_dir])
@@ -111,9 +114,12 @@ class BackendSettings(BaseModel):
                     workspace_context: "WorkspaceContext",
                     backend: str,
                     key: str) -> Optional[Any]:
-        from octo_pipeline_python.backends.backends_context import BackendsContext
-        from octo_pipeline_python.pipeline.pipeline_context import PipelineContext
-        from octo_pipeline_python.workspace.workspace_context import WorkspaceContext
+        from octo_pipeline_python.backends.backends_context import \
+            BackendsContext
+        from octo_pipeline_python.pipeline.pipeline_context import \
+            PipelineContext
+        from octo_pipeline_python.workspace.workspace_context import \
+            WorkspaceContext
         settings: Dict[str, "BackendSettings"] = pipeline_context.backends_settings
         if backend in settings:
             backend_description = backends_context.describe_backend(backend, workspace_context)

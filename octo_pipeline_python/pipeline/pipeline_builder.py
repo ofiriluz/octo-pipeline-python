@@ -142,7 +142,8 @@ class PipelineBuilder:
                 if ignore_workspace:
                     return None
                 from octo_pipeline_python.workspace.workspace import Workspace
-                from octo_pipeline_python.workspace.workspace_builder import WorkspaceBuilder
+                from octo_pipeline_python.workspace.workspace_builder import \
+                    WorkspaceBuilder
 
                 # Try to resolve a workspace instead and from that find the current pipeline
                 workspace: Workspace = WorkspaceBuilder.create(source_dir=source_dir)

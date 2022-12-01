@@ -64,7 +64,8 @@ class Workspace:
         :param head:
         :return:
         """
-        from octo_pipeline_python.workspace.workspace_builder import WorkspaceBuilder
+        from octo_pipeline_python.workspace.workspace_builder import \
+            WorkspaceBuilder
         if not os.path.exists(to_path):
             os.makedirs(to_path)
         if len(os.listdir(to_path)) > 0:

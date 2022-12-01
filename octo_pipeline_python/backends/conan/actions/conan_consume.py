@@ -47,9 +47,10 @@ class ConanConsume(Action):
         :param action_name:
         :return:
         """
-        from octo_pipeline_python.backends.conan import ConanBackend
         from conans.client import conan_api
         from conans.errors import ConanException
+
+        from octo_pipeline_python.backends.conan import ConanBackend
 
         # Execute conan consumption
         conan_client: conan_api.Conan = backends_context.attribute(backend.backend_name(), "conan_client")
