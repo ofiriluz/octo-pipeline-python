@@ -29,3 +29,4 @@ class ActionType(str, Enum):
     Detect = "detect"
     Verify = "verify"
     Extract = "extract"
+    Patch = "patch"

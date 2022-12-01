@@ -43,6 +43,9 @@
         "include": ["python-gnupg"],
         "tags": ["common", "security"]
     },
+    "patch": {
+        "tags": ["cpp"]
+    },
     "perl": {
         "tags": ["shell"]
     },
