@@ -1,6 +1,6 @@
 from typing import Optional
 
-from utils.logger import logger
+from octo_pipeline_python.utils.logger import logger
 
 from octo_pipeline_python.actions.action import Action, ActionType
 from octo_pipeline_python.actions.action_result import (ActionResult,

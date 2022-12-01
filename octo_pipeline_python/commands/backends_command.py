@@ -9,7 +9,7 @@ from octo_pipeline_python.utils.logger import logger
 
 class BackendsCommand(Command):
     def define_command(self, subparsers) -> None:
-        from workspace.workspace_description import WorkspaceDescription
+        from octo_pipeline_python.workspace.workspace_description import WorkspaceDescription
         backends_parser = subparsers.add_parser("backends")
         backends_subparsers = backends_parser.add_subparsers(dest="backend")
         backends_subparsers.required = True
@@ -47,7 +47,7 @@ class BackendsCommand(Command):
                                     help="Which key to get from the backend")
 
     def run_command(self, args: argparse.Namespace) -> ActionResultCode:
-        from backends.backend_auth_details import BackendAuthDetails
+        from octo_pipeline_python.backends.backend_auth_details import BackendAuthDetails
         result: ActionResultCode = ActionResultCode.SUCCESS
         if args.backend == "init":
             result = self.workspace.singular_pipeline.initialize_pipeline(self.backends_context,

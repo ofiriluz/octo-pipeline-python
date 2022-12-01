@@ -105,7 +105,7 @@ class PipelineCommand(Command):
         step_subparsers.add_parser("reset", help="Resets the steps to 0")
 
     def run_command(self, args: argparse.Namespace) -> ActionResultCode:
-        from pipeline.pipeline import Pipeline
+        from octo_pipeline_python.pipeline.pipeline import Pipeline
         if args.pipeline_action == "init":
             source_dir = os.path.join(os.getcwd(), args.name)
             if self.workspace:

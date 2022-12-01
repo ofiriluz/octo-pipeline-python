@@ -67,7 +67,7 @@ class PipelineContext(BaseModel):
         :param workspace_context:
         :return:
         """
-        from backends.backend_description import BackendDescription
+        from octo_pipeline_python.backends.backend_description import BackendDescription
         backend_desc: BackendDescription = backend.describe_backend(self, workspace_context)
         if backend.backend_name() in self.backends_settings and \
                 self.backends_settings[backend.backend_name()].backend_args:
@@ -84,7 +84,7 @@ class PipelineContext(BaseModel):
         :param action_name:
         :return:
         """
-        from backends.backend_settings import ActionSettings
+        from octo_pipeline_python.backends.backend_settings import ActionSettings
         if self.backends_settings and backend.backend_name() in self.backends_settings:
             if self.backends_settings[backend.backend_name()].backend_action_settings and \
                     ((action_type in self.backends_settings[backend.backend_name()].backend_action_settings) or
@@ -133,6 +133,6 @@ class PipelineContext(BaseModel):
 
 
 # Workaround for circular import of backend settings
-from backends.backend_settings import BackendSettings
+from octo_pipeline_python.backends.backend_settings import BackendSettings
 
 PipelineContext.update_forward_refs()

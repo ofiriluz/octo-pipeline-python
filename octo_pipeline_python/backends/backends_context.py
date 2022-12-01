@@ -19,7 +19,7 @@ from octo_pipeline_python.workspace.workspace_context import WorkspaceContext
 
 class BackendsContext:
     def __init__(self, workspace_context: WorkspaceContext):
-        from backends.backend import Backend
+        from octo_pipeline_python.backends.backend import Backend
         self.__backends: Dict[str, Backend] = {}
         self.__backends_attributes: Dict[str, Any] = {}
         self.__backends_attributes_exclude: Dict[str, bool] = defaultdict(bool)

@@ -67,7 +67,7 @@ class Backend:
         :param action_name:
         :return:
         """
-        from backends.backend_description import BackendDescription
+        from octo_pipeline_python.backends.backend_description import BackendDescription
         description: BackendDescription = self.describe_backend(backends_context, workspace_context)
         if action_type in description.actions:
             action = description.actions[action_type]
@@ -91,7 +91,7 @@ class Backend:
         :param action_name:
         :return:
         """
-        from backends.backend_description import BackendDescription
+        from octo_pipeline_python.backends.backend_description import BackendDescription
         description: BackendDescription = self.describe_backend(backends_context, workspace_context)
         if action_type in description.actions:
             action = description.actions[action_type]
@@ -117,7 +117,7 @@ class Backend:
         :param action_name
         :return:
         """
-        from backends.backend_description import BackendDescription
+        from octo_pipeline_python.backends.backend_description import BackendDescription
         description: BackendDescription = self.describe_backend(backends_context, workspace_context)
         if action_type in description.actions:
             action = description.actions[action_type]

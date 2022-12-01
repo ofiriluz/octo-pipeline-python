@@ -51,7 +51,7 @@ class Pipeline:
         :param external:
         :return:
         """
-        from pipeline.pipeline_builder import PipelineBuilder
+        from octo_pipeline_python.pipeline.pipeline_builder import PipelineBuilder
         if not os.path.exists(to_path):
             os.makedirs(to_path)
         if len(os.listdir(to_path)) > 0:
