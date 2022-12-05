@@ -86,6 +86,7 @@ class BlackduckDetect(Action):
                         f"--blackduck.url={blackduck_args.blackduck_url} " \
                         f"--blackduck.trust.cert={'true' if blackduck_args.blackduck_certificate_validation else 'false'} " \
                         f"--detect.source.path={source_path} " \
+                        f"--detect.report.timeout={blackduck_args.timeout} " \
                         f"--detect.project.version.name={pipeline_context.version} " \
                         f"--detect.project.name={pipeline_context.name if not blackduck_args.project_group else f'{blackduck_args.project_group}-{pipeline_context.name}'} " \
                         f"--detect.parallel.processors={blackduck_args.parallel_processors} " \

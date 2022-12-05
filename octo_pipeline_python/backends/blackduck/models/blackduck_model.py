@@ -76,7 +76,7 @@ class BlackduckModel(BaseModel):
     clone_from_latest: bool = Field(description="Whether to clone from latest version if exists and we upgraded a version",
                                     default=True)
     timeout: int = Field(description="Timeout for blackduck detect",
-                         default=300)
+                         default=900)
     excluded_directories: List[str] = Field(description="List of dirs to exclude from scanning",
                                             default_factory=list)
     source_path: Optional[str] = Field(description="Source patch to run the detection on, cwd will be used otherwise")
