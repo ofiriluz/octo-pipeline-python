@@ -221,7 +221,7 @@ class WorkspaceCommand(Command):
             else:
                 source_dir = os.path.join(source_dir, args.workspace_dir)
                 try:
-                    os.makedirs(source_dir, exist_ok=False)
+                    os.makedirs(source_dir, exist_ok=True)
                     logger.info(f"Workspace initializes to [{source_dir}].")
                 except FileExistsError as os_err:
                     if os.path.isfile(source_dir):
