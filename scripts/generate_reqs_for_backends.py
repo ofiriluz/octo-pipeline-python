@@ -48,10 +48,10 @@ def main():
                 reqs.extend(GLOBALLY_INCLUDED_REQS)
                 if human_backend_f in extra_reqs.keys():
                     reqs.extend(extra_reqs[human_backend_f].get('include', []))
-                    reqs = list(filter(lambda req: req not in extra_reqs[human_backend_f].get("exclude", []) and
-                                                   req not in GLOBALLY_EXCLUDED_REQS and len(req) > 0, reqs))
+                    reqs = set(filter(lambda req: req not in extra_reqs[human_backend_f].get("exclude", []) and
+                                                  req not in GLOBALLY_EXCLUDED_REQS and len(req) > 0, reqs))
                 else:
-                    reqs = list(filter(lambda req: req not in GLOBALLY_EXCLUDED_REQS and len(req) > 0, reqs))
+                    reqs = set(filter(lambda req: req not in GLOBALLY_EXCLUDED_REQS and len(req) > 0, reqs))
                 print(f"Generated reqs for backend [{human_backend_f}]:")
                 print(reqs)
                 f.seek(0)
