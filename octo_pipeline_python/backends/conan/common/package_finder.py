@@ -2,14 +2,15 @@ import os
 import platform
 import subprocess
 from shutil import which
-from typing import List
+from typing import List, Optional
 
 
 class PackageFinder:
     @staticmethod
     def find_package(name: str,
                      extra_hints: List[str] = None,
-                     default: str = "") -> str:
+                     default: str = "",
+                     brew_specific_version: Optional[str] = None) -> str:
         hints = []
         if extra_hints:
             hints.extend(extra_hints)
@@ -19,7 +20,10 @@ class PackageFinder:
                           os.path.join(os.path.expanduser("~"), "brew", "opt")])
             if which("brew") is not None:
                 # Try finding by brew
-                p = subprocess.Popen(f"brew --prefix {name}",
+                brew_name = name
+                if brew_specific_version is not None:
+                    brew_name += '@' + brew_specific_version
+                p = subprocess.Popen(f"brew --prefix {brew_name}",
                                      shell=True,
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.PIPE)
