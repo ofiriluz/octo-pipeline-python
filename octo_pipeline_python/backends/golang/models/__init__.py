@@ -1,2 +1,2 @@
-from octo_pipeline_python.backends.golang.models.golang_model import \
-    GolangModel, GolangEntrypointInfo
+from octo_pipeline_python.backends.golang.models.golang_model import (
+    GolangEntrypointInfo, GolangModel)

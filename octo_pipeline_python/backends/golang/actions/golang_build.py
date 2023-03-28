@@ -6,7 +6,8 @@ from octo_pipeline_python.actions.action_result import (ActionResult,
                                                         ActionResultCode)
 from octo_pipeline_python.backends.backend import Backend
 from octo_pipeline_python.backends.backends_context import BackendsContext
-from octo_pipeline_python.backends.golang.models import GolangModel, GolangEntrypointInfo
+from octo_pipeline_python.backends.golang.models import (GolangEntrypointInfo,
+                                                         GolangModel)
 from octo_pipeline_python.pipeline.pipeline_context import PipelineContext
 from octo_pipeline_python.utils.logger import logger
 from octo_pipeline_python.workspace.workspace_context import WorkspaceContext
