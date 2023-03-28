@@ -38,6 +38,9 @@ class GolangBuild(Action):
                     f"Running build action")
         env = os.environ.copy()
         env.update(**golang_args.env)
+        extra_args = ''
+        if golang_args.mod_path:
+            extra_args = f'-modfile {golang_args.mod_path}'
         for entrypoint in golang_args.entrypoints:
             entrypoint_path = entrypoint
             output_path = build_dir
@@ -47,7 +50,7 @@ class GolangBuild(Action):
                     output_path = os.path.join(output_path, entrypoint.output_name)
             logger.info(f'Running go build on entrypoint [{entrypoint_path}] outputted to [{output_path}]')
             p = pipeline_context.run_contextual(
-                f"{golang_args.go_path} build -o {output_path} {entrypoint_path}", cwd=pipeline_context.source_dir, env=env)
+                f"{golang_args.go_path} build -o {output_path} {extra_args} {entrypoint_path}", cwd=pipeline_context.source_dir, env=env)
             p.communicate()
             if p.returncode != 0:
                 return ActionResult(action_type=self.action_type,

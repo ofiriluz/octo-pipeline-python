@@ -31,8 +31,14 @@ class GolangLintChecks(Action):
                                                         action_name)
         logger.info(f"[{pipeline_context.name}][{backend.backend_name()}] "
                     f"Running lint checks action")
+        args = ''
+        if golang_args.linter == 'golangci-lint':
+            args = 'run'
+        linter_path = golang_args.linter
+        if golang_args.golint_path:
+            linter_path = golang_args.golint_path
         p = pipeline_context.run_contextual(
-            f"{golang_args.golint_path} ./...", cwd=pipeline_context.source_dir)
+            f"{linter_path} {args} ./...", cwd=pipeline_context.source_dir)
         p.communicate()
         if p.returncode != 0:
             return ActionResult(action_type=self.action_type,
