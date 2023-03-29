@@ -37,8 +37,13 @@ class GolangLintChecks(Action):
         linter_path = golang_args.linter
         if golang_args.golint_path:
             linter_path = golang_args.golint_path
+        lint_paths = ' ./...'
+        if golang_args.lint_paths:
+            lint_paths = ''
+            for p in golang_args.lint_paths:
+                lint_paths += f' {p}/.../'
         p = pipeline_context.run_contextual(
-            f"{linter_path} {args} ./...", cwd=pipeline_context.source_dir)
+            f"{linter_path} {args}{lint_paths}", cwd=pipeline_context.source_dir)
         p.communicate()
         if p.returncode != 0:
             return ActionResult(action_type=self.action_type,
