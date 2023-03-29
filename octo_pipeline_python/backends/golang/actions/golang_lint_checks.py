@@ -34,6 +34,8 @@ class GolangLintChecks(Action):
         args = ''
         if golang_args.linter == 'golangci-lint':
             args = 'run'
+            if golang_args.linter_timeout:
+                args += f' --timeout {golang_args.linter_timeout}m'
         linter_path = golang_args.linter
         if golang_args.golint_path:
             linter_path = golang_args.golint_path
