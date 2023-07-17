@@ -61,9 +61,9 @@ class BlackduckModel(BaseModel):
     project_group: Optional[str] = Field(description="Group name of the project, added as part of the project name")
 
     # Detect params
-    detect_script_url = Field(description="Blackduck detect script url to use",
+    detect_script_url: str = Field(description="Blackduck detect script url to use",
                               default="https://detect.synopsys.com/detect7.sh")
-    detect_script_shell = Field(description="Running blackduck detect shell",
+    detect_script_shell: str = Field(description="Running blackduck detect shell",
                                 default="bash")
     parallel_processors: int = Field(description="Amount of parallel detect tasks",
                                      default=min(multiprocessing.cpu_count() / 2, 8))
