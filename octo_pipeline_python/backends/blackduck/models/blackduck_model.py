@@ -10,7 +10,7 @@ class BlackduckRiskThreshold(BaseModel):
     high: int = Field(description="High risk threshold",
                       default=1)
     medium: int = Field(description="Medium risk threshold",
-                        ddetect_script_urlefault=10)
+                        default=10)
     low: int = Field(description="Low risk threshold",
                      default=50)
     ok: int = Field(description="Ok risk threshold",
