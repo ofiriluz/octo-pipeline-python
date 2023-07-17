@@ -20,7 +20,7 @@ isort = "*"
 [packages]
 requests = "*"
 colorama = "*"
-pydantic = "*"
+pydantic = "~=1.10.0"
 packaging = "*"
 argcomplete = "*"
 GitPython = "*"
