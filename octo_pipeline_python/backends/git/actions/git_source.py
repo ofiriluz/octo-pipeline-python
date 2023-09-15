@@ -58,6 +58,9 @@ class GitSource(Action):
                             f"Path [{source_dir}] already exists, will use the existing folder")
                 repo = git.Repo(source_dir)
             repo.git.checkout(git_args.head)
+            if git_args.submodule_init:
+                logger.info(f"[{pipeline_context.name}][{backend.backend_name()}] Running submodule update init")
+                repo.git.submodule('update', '--init')
             return ActionResult(action_type=self.action_type,
                                 result=[],
                                 result_code=ActionResultCode.SUCCESS)

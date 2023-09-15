@@ -8,3 +8,4 @@ class GitModel(BaseModel):
     mirror: Optional[str] = Field(description="Mirror remote to add")
     shallow: bool = Field(description="Shallow clone", default=False)
     recursive: bool = Field(description="Recursive clone", default=False)
+    submodule_init: bool = Field(description="Try to run submodule init", default=False)
