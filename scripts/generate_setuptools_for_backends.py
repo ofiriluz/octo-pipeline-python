@@ -120,6 +120,8 @@ def main():
                     f.write('\n'.join([
                         f"include octo_pipeline_python/backends/{code_backend}/{data}"
                         for data in extra_reqs[backend]["data"]]))
+            os.makedirs(os.path.join(root_dir, 'backends_build', backend))
+            os.makedirs(os.path.join(root_dir, 'backends_dist', backend))
             retcode = subprocess.call(f"python3 {os.path.join('scripts', backend_reqs_path, 'setup.py')} bdist_wheel",
                                       shell=True, cwd=root_dir)
             if retcode != 0:

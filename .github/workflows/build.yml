@@ -18,7 +18,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Pipenv
         run: |
-          pip3 install pipenv wheel
+          pip3 install pipenv
       - name: Clean Environment
         run: |
           make clean

@@ -16,6 +16,7 @@ yamllint = "*"
 twine = "*"
 python-dotenv = "*"
 isort = "*"
+wheel = "*"
 
 [packages]
 requests = "*"
