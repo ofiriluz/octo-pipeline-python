@@ -12,7 +12,7 @@ GLOBALLY_INCLUDED_REQS = ["octo-pipeline-python"]
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--certificate-path", type=str, default=None)
-    parser.add_argument("--pypi-server", type=str, default="https://pypi.python.org/simple")
+    parser.add_argument("--pypi-server", type=str, default="https://pypi.python.org/pypi/")
     parser.add_argument("--use-local", help="Use local package info for DEV purposes only",
                         action="store_true", default=False)
     args = parser.parse_args()
