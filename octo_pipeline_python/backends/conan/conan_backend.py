@@ -72,10 +72,7 @@ class ConanBackend(Backend):
         os.environ['CONAN_COLOR_DISPLAY'] = "1"
 
         # Dependency collision
-        if conan_pipeline_args.error_on_override is None and conan_workspace_args.error_on_override is None:
-            error_on_override = True
-        else:
-            error_on_override = conan_pipeline_args.error_on_override or conan_workspace_args.error_on_override or False
+        error_on_override = not (conan_pipeline_args.enable_dependency_collision or conan_workspace_args.enable_dependency_collision)
         os.environ["CONAN_ERROR_ON_OVERRIDE"] = str(error_on_override)
 
     @staticmethod
