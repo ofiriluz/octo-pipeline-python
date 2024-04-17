@@ -48,7 +48,9 @@ class ConanBackend(Backend):
         self.__conan_lock = RLock()
 
     @staticmethod
-    def __configure_conan_env_vars(backends_context: BackendsContext) -> None:
+    def __configure_conan_env_vars(conan_pipeline_args: ConanModel,
+                                conan_workspace_args: ConanModel,
+                                backends_context: BackendsContext,) -> None:
         conan_dir = backends_context.attribute(TAG, "conan_dir")
 
         # Set the home directory
@@ -68,6 +70,13 @@ class ConanBackend(Backend):
 
         # Coloring
         os.environ['CONAN_COLOR_DISPLAY'] = "1"
+
+        # Dependency collision
+        if conan_pipeline_args.error_on_override is None and conan_workspace_args.error_on_override is None:
+            error_on_override = True
+        else:
+            error_on_override = conan_pipeline_args.error_on_override or conan_workspace_args.error_on_override or False
+        os.environ["CONAN_ERROR_ON_OVERRIDE"] = str(error_on_override)
 
     @staticmethod
     def __configure_conan_conf(backends_context: BackendsContext) -> None:
@@ -363,7 +372,7 @@ class ConanBackend(Backend):
             self.__configure_profile(conan_args, backends_context, pipeline_context)
 
             # Configure conan env vars
-            self.__configure_conan_env_vars(backends_context)
+            self.__configure_conan_env_vars(conan_pipeline_args, conan_workspace_args, backends_context)
 
             # Configure build types for the action
             self.__configure_build_types(conan_pipeline_args, conan_workspace_args,

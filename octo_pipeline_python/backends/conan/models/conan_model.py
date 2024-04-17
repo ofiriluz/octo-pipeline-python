@@ -13,3 +13,4 @@ class ConanModel(BaseModel):
     settings: Optional[Dict[str, Dict[str, str]]] = Field(description="Key value conan profile settings")
     deploy: Optional[str] = Field(description="Remote to deploy to")
     no_default_remotes: bool = Field(description="Remove conan default remotes", default=False)
+    error_on_override: Optional[bool] = Field(description="Fail on dependencies version collisions", default=None)
