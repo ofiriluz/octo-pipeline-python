@@ -28,7 +28,8 @@ GitPython = "*"
 pyyaml = "*"
 toml = "*"
 overrides = "*"
-networkx = "*"
+# python 3.8 compatibility
+networkx = "~=3.1"
 keyring = "*"
 "keyrings.cryptfile" = "*"
 
