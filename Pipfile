@@ -29,7 +29,7 @@ pyyaml = "*"
 toml = "*"
 overrides = "*"
 # python 3.8 compatibility
-networkx = "~=3.1"
+networkx = "~=3.1.0"
 keyring = "*"
 "keyrings.cryptfile" = "*"
 
