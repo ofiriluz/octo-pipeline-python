@@ -51,6 +51,7 @@ class ConanConsume(Action):
         from conans.errors import ConanException
 
         from octo_pipeline_python.backends.conan import ConanBackend
+
         # Execute conan consumption
         conan_client: conan_api.Conan = backends_context.attribute(backend.backend_name(), "conan_client")
         allowed_configurations = backends_context.attribute(backend.backend_name(),
