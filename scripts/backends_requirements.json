@@ -19,7 +19,7 @@
         "tags": ["cpp"]
     },
     "conan": {
-        "include": ["conan==1.59.0"],
+        "include": ["conan<2"],
         "exclude": ["conan"],
         "tags": ["cpp"]
     },
