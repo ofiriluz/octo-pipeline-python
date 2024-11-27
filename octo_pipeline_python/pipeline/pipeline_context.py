@@ -13,8 +13,8 @@ from octo_pipeline_python.utils.logger import logger
 
 class PipelineStats(BaseModel):
     start_time: Optional[datetime] = Field(
-        None, description="Start time of the pipeline")
-    end_time: Optional[datetime] = Field(None, description="End time of the pipeline")
+        default=None, description="Start time of the pipeline")
+    end_time: Optional[datetime] = Field(default=None, description="End time of the pipeline")
     actions_executed: Optional[int] = Field(description="Number of actions executed so far", default=0)
 
 
@@ -22,18 +22,18 @@ class PipelineContext(BaseModel):
     name: str = Field(description="Name of the context pipeline")
     scm: Union[str, List[str]] = Field(description="SCM of the context")
     version: str = Field(description="Version of the context pipeline")
-    build_number: Optional[Union[int, str]] = Field(None, description="Build number of the pipeline")
-    maintainers: Optional[List[str]] = Field(None, description="List of maintainers")
-    head: Optional[str] = Field(None, description="Branch of the source code context")
+    build_number: Optional[Union[int, str]] = Field(default=None, description="Build number of the pipeline")
+    maintainers: Optional[List[str]] = Field(default=None, description="List of maintainers")
+    head: Optional[str] = Field(default=None, description="Branch of the source code context")
     source_dir: str = Field(description="Source directory of the code")
     working_dir: str = Field(description="Working directory of the pipeline")
     surrounding: Surrounding = Field(description="Current running surrounding")
     user: str = Field(description="Current working user, prod if jenkins")
     stats: PipelineStats = Field(description="Stats about the pipeline")
     backends_settings: Optional[Dict[str, "BackendSettings"]] = \
-        Field(None, description="Arguments of the pipeline for the backends")
+        Field(default=None, description="Arguments of the pipeline for the backends")
     settings_path: Optional[str] = Field(
-        None, description="Settings path found for edits")
+        default=None, description="Settings path found for edits")
 
     @field_validator("version")
     @classmethod

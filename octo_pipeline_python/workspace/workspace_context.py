@@ -9,7 +9,7 @@ from octo_pipeline_python.common.surrounding import Surrounding
 
 
 class WorkspaceStats(BaseModel):
-    init_time: Optional[datetime] = Field(None, description="Start time of the pipeline")
+    init_time: Optional[datetime] = Field(default=None, description="Start time of the pipeline")
     pipelines_executed: Optional[int] = Field(description="Number of pipelines executed so far", default=0)
 
 
@@ -21,11 +21,11 @@ class WorkspaceContext(BaseModel):
     surrounding: Surrounding = Field(description="Workspace surrounding")
     organizations: List[str] = Field(description="List of organizations to try and grab the workspace from")
     backends_settings: Optional[Dict[str, "BackendSettings"]] = \
-        Field(None, description="Arguments of the workspace for the backends")
-    settings_path: Optional[str] = Field(None, description="Settings path found for edit")
+        Field(default=None, description="Arguments of the workspace for the backends")
+    settings_path: Optional[str] = Field(default=None, description="Settings path found for edit")
     stats: WorkspaceStats = Field(description="Stats on the workspace level")
     is_singular: bool = Field(description="Whether this is a singular pipeline and not a workspace", default=False)
-    extra_args: Optional[List[str]] = Field(None, description="Extra command line arguments")
+    extra_args: Optional[List[str]] = Field(default=None, description="Extra command line arguments")
 
     def backend_args_for_backend(self, backend: "Backend",
                                  workspace_context: "WorkspaceContext") -> Any:

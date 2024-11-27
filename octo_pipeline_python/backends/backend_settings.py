@@ -12,9 +12,9 @@ SETTINGS_FILE_NAME = "settings.yml"
 
 
 class BackendSettings(BaseModel):
-    backend_args: Optional[Any] = Field(None, description="Arguments of the context")
+    backend_args: Optional[Any] = Field(default=None, description="Arguments of the context")
     backend_action_settings: Optional[Dict[Union[ActionType, str], List[ActionSettings]]] = \
-        Field(None, description="Map of action configurations for the backend")
+        Field(default=None, description="Map of action configurations for the backend")
 
     @staticmethod
     def create(source_dir: str,
