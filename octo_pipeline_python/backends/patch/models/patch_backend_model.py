@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 class FilePatch(BaseModel):
     patch_src: str = Field(description="The patch file to apply.")
     patch_dst: str = Field(description="File to apply patch to.")
-    platform_list: Optional[List[str]] = Field(description="On what platforms to apply this patch.")
+    platform_list: Optional[List[str]] = Field(default=None, description="On what platforms to apply this patch.")
 
 
 class PatchModel(BaseModel):

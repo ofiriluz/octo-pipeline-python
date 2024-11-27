@@ -27,5 +27,5 @@ class SnykModel(BaseModel):
     cfn_path: str = Field(
         description="Path to the cloudformation to scan",
         default="cdk.out/*.template.json")
-    snyk_scan_dir: Optional[str] = Field(description="Custom dir to use for the snyk security checks scanning")
-    policy_path: Optional[str] = Field(description="Policy path to use for scans")
+    snyk_scan_dir: Optional[str] = Field(default=None, description="Custom dir to use for the snyk security checks scanning")
+    policy_path: Optional[str] = Field(default=None, description="Policy path to use for scans")

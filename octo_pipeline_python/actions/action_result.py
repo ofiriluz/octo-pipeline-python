@@ -14,6 +14,6 @@ class ActionResultCode(IntEnum):
 
 
 class ActionResult(BaseModel):
-    action_type: Optional[ActionType] = Field(description="The action type that ran")
+    action_type: Optional[ActionType] = Field(default=None, description="The action type that ran")
     result: List[Any] = Field(description="Results of the action")
     result_code: ActionResultCode = Field(description="Result code of the action")

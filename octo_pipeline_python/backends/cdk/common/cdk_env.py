@@ -1,8 +1,6 @@
 import os
 from typing import Dict, Optional
 
-import dotenv
-
 from octo_pipeline_python.backends.cdk.models.cdk_model import CDKDeployEnv
 from octo_pipeline_python.pipeline.pipeline_context import PipelineContext
 
@@ -12,6 +10,7 @@ class CDKEnv:
     def load_dotenv(pipeline_context: PipelineContext,
                     deploy_env: Optional[CDKDeployEnv] = None,
                     deployment_env_vars: Optional[Dict[str, str]] = None):
+        import dotenv
         dot_env_file = f'{pipeline_context.source_dir}/.env'
         env_vars = {}
         if os.path.exists(dot_env_file):

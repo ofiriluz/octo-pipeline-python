@@ -21,7 +21,7 @@ wheel = "*"
 [packages]
 requests = "*"
 colorama = "*"
-pydantic = "~=1.10.0"
+pydantic = "*"
 packaging = "*"
 argcomplete = "*"
 GitPython = "*"
@@ -30,7 +30,8 @@ toml = "*"
 overrides = "*"
 networkx = "*"
 keyring = "*"
+python-dateutil = "*"
 "keyrings.cryptfile" = "*"
 
 [requires]
-python_version = "3"
+python_version = "^3.11"

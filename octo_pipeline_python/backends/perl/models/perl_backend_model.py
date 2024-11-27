@@ -8,4 +8,4 @@ class PerlModel(BaseModel):
     verbose: bool = Field(default=True)
     ignore_failures: bool = Field(default=False)
     perl_binary_path: str = Field(default="perl")
-    working_dir: Optional[str] = Field()
+    working_dir: Optional[str] = Field(default=None)

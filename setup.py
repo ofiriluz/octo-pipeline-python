@@ -115,14 +115,14 @@ setup(
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10'
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13'
     ],
     # Package configuration
     packages=find_packages(exclude=('tests', *get_backends_exclude(),)),
     include_package_data=True,
-    python_requires='>= 3.8',
+    python_requires='>= 3.11',
     install_requires=get_install_requirements(),
     extras_require=get_backends_extras(),
     # Licensing and copyright

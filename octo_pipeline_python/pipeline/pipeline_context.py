@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
 
 from packaging.version import Version
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 from octo_pipeline_python.common.surrounding import Surrounding
 from octo_pipeline_python.utils.logger import logger
@@ -13,8 +13,8 @@ from octo_pipeline_python.utils.logger import logger
 
 class PipelineStats(BaseModel):
     start_time: Optional[datetime] = Field(
-        description="Start time of the pipeline")
-    end_time: Optional[datetime] = Field(description="End time of the pipeline")
+        None, description="Start time of the pipeline")
+    end_time: Optional[datetime] = Field(None, description="End time of the pipeline")
     actions_executed: Optional[int] = Field(description="Number of actions executed so far", default=0)
 
 
@@ -22,20 +22,21 @@ class PipelineContext(BaseModel):
     name: str = Field(description="Name of the context pipeline")
     scm: Union[str, List[str]] = Field(description="SCM of the context")
     version: str = Field(description="Version of the context pipeline")
-    build_number: Optional[Union[int, str]] = Field(description="Build number of the pipeline")
-    maintainers: Optional[List[str]] = Field(description="List of maintainers")
-    head: Optional[str] = Field(description="Branch of the source code context")
+    build_number: Optional[Union[int, str]] = Field(None, description="Build number of the pipeline")
+    maintainers: Optional[List[str]] = Field(None, description="List of maintainers")
+    head: Optional[str] = Field(None, description="Branch of the source code context")
     source_dir: str = Field(description="Source directory of the code")
     working_dir: str = Field(description="Working directory of the pipeline")
     surrounding: Surrounding = Field(description="Current running surrounding")
     user: str = Field(description="Current working user, prod if jenkins")
     stats: PipelineStats = Field(description="Stats about the pipeline")
     backends_settings: Optional[Dict[str, "BackendSettings"]] = \
-        Field(description="Arguments of the pipeline for the backends")
+        Field(None, description="Arguments of the pipeline for the backends")
     settings_path: Optional[str] = Field(
-        description="Settings path found for edits")
+        None, description="Settings path found for edits")
 
-    @validator("version")
+    @field_validator("version")
+    @classmethod
     def version_validator(cls, v):
         """
         Validator for version
@@ -72,7 +73,7 @@ class PipelineContext(BaseModel):
         backend_desc: BackendDescription = backend.describe_backend(self, workspace_context)
         if backend.backend_name() in self.backends_settings and \
                 self.backends_settings[backend.backend_name()].backend_args:
-            return backend_desc.backend_model.parse_obj(self.backends_settings[backend.backend_name()].backend_args)
+            return backend_desc.backend_model.model_validate(self.backends_settings[backend.backend_name()].backend_args)
         return None
 
     def backend_action_settings_for_backend(self, backend: "Backend", action_type: "ActionType",

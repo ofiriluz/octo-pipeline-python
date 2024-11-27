@@ -1,7 +1,7 @@
 import multiprocessing
 from typing import List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class BlackduckRiskThreshold(BaseModel):
@@ -17,9 +17,7 @@ class BlackduckRiskThreshold(BaseModel):
                     default=100)
     unknown: int = Field(description="Unknown risk threshold",
                          default=200)
-
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def __ge__(self, other: "BlackduckRiskThreshold") -> bool:
         return self.critical >= other.critical or \
@@ -41,9 +39,7 @@ class BlackduckRiskThresholds(BaseModel):
                                             default_factory=BlackduckRiskThreshold)
     vulnerability: BlackduckRiskThreshold = Field(description="Vulnerability risk threshold",
                                                   default_factory=BlackduckRiskThreshold)
-
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def __ge__(self, other: "BlackduckRiskThresholds") -> bool:
         return self.activity >= other.activity or \
@@ -58,7 +54,7 @@ class BlackduckModel(BaseModel):
     blackduck_url: str = Field(description="Blackduck base url")
     blackduck_certificate_validation: bool = Field(description="Whether to validate certificate",
                                                    default=True)
-    project_group: Optional[str] = Field(description="Group name of the project, added as part of the project name")
+    project_group: Optional[str] = Field(default=None, description="Group name of the project, added as part of the project name")
 
     # Detect params
     detect_script_url: str = Field(description="Blackduck detect script url to use",
@@ -79,8 +75,8 @@ class BlackduckModel(BaseModel):
                          default=900)
     excluded_directories: List[str] = Field(description="List of dirs to exclude from scanning",
                                             default_factory=list)
-    source_path: Optional[str] = Field(description="Source patch to run the detection on, cwd will be used otherwise")
-    code_location_name: Optional[str] = Field(description="Code location name to use")
+    source_path: Optional[str] = Field(default=None, description="Source patch to run the detection on, cwd will be used otherwise")
+    code_location_name: Optional[str] = Field(default=None, description="Code location name to use")
 
     # Verify params
     projects_to_verify: List[str] = Field(description="Projects to verify vulnerabilities in format of name@version",
