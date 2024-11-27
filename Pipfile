@@ -17,6 +17,7 @@ twine = "*"
 python-dotenv = "*"
 isort = "*"
 wheel = "*"
+setuptools = "*"
 
 [packages]
 requests = "*"
