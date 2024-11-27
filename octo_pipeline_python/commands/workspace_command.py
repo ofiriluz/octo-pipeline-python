@@ -252,7 +252,7 @@ class WorkspaceCommand(Command):
             return ActionResultCode.FAILURE
         if args.workspace_action == "describe":
             logger.set_verbose(False)
-            sys.stdout.write(self.workspace.describe_workspace().json(indent=4))
+            sys.stdout.write(self.workspace.describe_workspace().model_dump_json(indent=4))
         elif args.workspace_action == "describe-pipelines":
             logger.set_verbose(False)
             sys.stdout.write("\n".join(self.workspace.describe_pipelines()))

@@ -10,5 +10,5 @@ from octo_pipeline_python.workspace.workspace_pipeline import WorkspacePipeline
 
 class WorkspaceDescription(BaseModel):
     workspace: Dict[str, List[WorkspacePipeline]] = Field(description="Workspace description")
-    pipelines: Optional[Dict[str, List[PipelineDescription]]] = Field(description="The pipelines in the workspace")
+    pipelines: Optional[Dict[str, List[PipelineDescription]]] = Field(default=None, description="The pipelines in the workspace")
     context: WorkspaceContext = Field(description="Context of the workspace")

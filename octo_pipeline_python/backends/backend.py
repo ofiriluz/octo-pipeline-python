@@ -157,7 +157,7 @@ class Backend:
                 args = self.describe_backend(backends_context, workspace_context).backend_model()
         if action_type and not action_args:
             action_args = workspace_context.backend_action_settings_for_backend(self, action_type, action_name)
-        args = args.dict()
+        args = args.model_dump()
         if action_args:
             args.update(action_args)
         if workspace_context and workspace_context.extra_args:
@@ -165,11 +165,11 @@ class Backend:
             parser = argparse.ArgumentParser()
             PydanticArgparse.schema_to_argparse(schema, parser)
             known, unknown = parser.parse_known_args(workspace_context.extra_args)
-            args = args.dict()
+            args = args.model_dump()
             args.update(PydanticArgparse.argparse_to_schema(schema, known))
         sub = {
             **os.environ,
-            **(pipeline_context.dict() if pipeline_context else {})
+            **(pipeline_context.model_dump() if pipeline_context else {})
         }
         if pipeline_context:
             sub['full_version'] = pipeline_context.full_version
@@ -180,7 +180,7 @@ class Backend:
                 for idx in range(len(args[key])):
                     if isinstance(args[key][idx], str):
                         args[key][idx] = Template(args[key][idx]).safe_substitute(sub)
-        args = model.parse_obj(args)
+        args = model.model_validate(args)
         return args
 
     def store_backend_secret(self, secret: Dict,

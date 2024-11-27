@@ -38,7 +38,7 @@ class BlackduckVerify(Action):
                     ck.lower(): cv for ck, cv in val.items()
                 }
             # Parse the risk profile to a blackduck thresholds class
-            risk_profile = BlackduckRiskThresholds.parse_obj(parsable_risk_profile)
+            risk_profile = BlackduckRiskThresholds.model_validate(parsable_risk_profile)
             if risk_profile >= blackduck_args.risk_thresholds:
                 return risk_profile
         return None
@@ -93,7 +93,7 @@ class BlackduckVerify(Action):
                         return ActionResult(action_type=self.action_type,
                                             result=[f"Risk profile exceeds thresholds for "
                                                     f"[{proj_name_to_verify}@{proj_version_to_verify}]",
-                                                    risk_profile.dict()],
+                                                    risk_profile.model_dump()],
                                             result_code=ActionResultCode.FAILURE)
         return ActionResult(action_type=self.action_type,
                             result=[],

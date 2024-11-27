@@ -2,7 +2,7 @@ import os
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
-from pydantic import BaseModel, Field, parse_obj_as
+from pydantic import BaseModel, Field, TypeAdapter
 
 from octo_pipeline_python.actions.action_settings import ActionSettings
 from octo_pipeline_python.actions.action_type import ActionType
@@ -12,9 +12,9 @@ SETTINGS_FILE_NAME = "settings.yml"
 
 
 class BackendSettings(BaseModel):
-    backend_args: Optional[Any] = Field(description="Arguments of the context")
+    backend_args: Optional[Any] = Field(default=None, description="Arguments of the context")
     backend_action_settings: Optional[Dict[Union[ActionType, str], List[ActionSettings]]] = \
-        Field(description="Map of action configurations for the backend")
+        Field(default=None, description="Map of action configurations for the backend")
 
     @staticmethod
     def create(source_dir: str,
@@ -44,7 +44,7 @@ class BackendSettings(BaseModel):
             for backend in settings_yaml:
                 if 'actions' in settings_yaml[backend]:
                     actions = {ActionType._value2member_map_[action] if action in ActionType._value2member_map_.keys() else action:
-                                   parse_obj_as(List[ActionSettings], action_settings)
+                                   TypeAdapter(List[ActionSettings]).validate_python(action_settings)
                                for action, action_settings in settings_yaml[backend]['actions'].items()}
                     backend_settings = settings_yaml[backend]
                     del backend_settings['actions']
@@ -81,7 +81,7 @@ class BackendSettings(BaseModel):
         backend_description = backends_context.describe_backend(backend, workspace_context)
         backend_model = {}
         if backend in settings:
-            backend_model = backend_description.backend_model.parse_obj(settings[backend].backend_args).dict()
+            backend_model = backend_description.backend_model.model_validate(settings[backend].backend_args).model_dump()
         else:
             settings[backend] = BackendSettings()
         if key in backend_model and isinstance(backend_model[key], list):
@@ -125,7 +125,7 @@ class BackendSettings(BaseModel):
             backend_description = backends_context.describe_backend(backend, workspace_context)
             backend_model = {}
             if backend in settings:
-                backend_model = backend_description.backend_model.parse_obj(settings[backend].backend_args).dict()
+                backend_model = backend_description.backend_model.model_validate(settings[backend].backend_args).model_dump()
             if key in backend_model:
                 return backend_model[key]
         return None

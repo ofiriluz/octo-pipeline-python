@@ -10,4 +10,4 @@ class PipelineAction(BaseModel):
     action_type: ActionType = Field(description="Type of action to run")
     backends: List[str] = Field(description="On which backends to run the action")
     surroundings: List[Surrounding] = Field(description="Which surroundings is the action allowed to run on")
-    action_name: Optional[str] = Field(description="Action name to make the action unique")
+    action_name: Optional[str] = Field(default=None, description="Action name to make the action unique")

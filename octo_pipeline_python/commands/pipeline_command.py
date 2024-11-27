@@ -142,7 +142,7 @@ class PipelineCommand(Command):
                                                                        args.reset_cache)
         elif args.pipeline_action == "describe":
             logger.set_verbose(False)
-            sys.stdout.write(self.workspace.singular_pipeline.describe_pipeline().json(indent=4))
+            sys.stdout.write(self.workspace.singular_pipeline.describe_pipeline().model_dump_json(indent=4))
         elif args.pipeline_action == "describe-actions":
             logger.set_verbose(False)
             sys.stdout.write("\n".join([action.action_type for action in

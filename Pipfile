@@ -17,11 +17,12 @@ twine = "*"
 python-dotenv = "*"
 isort = "*"
 wheel = "*"
+setuptools = "*"
 
 [packages]
 requests = "*"
 colorama = "*"
-pydantic = "~=1.10.0"
+pydantic = "*"
 packaging = "*"
 argcomplete = "*"
 GitPython = "*"
@@ -30,6 +31,7 @@ toml = "*"
 overrides = "*"
 networkx = "*"
 keyring = "*"
+python-dateutil = "*"
 "keyrings.cryptfile" = "*"
 
 [requires]

@@ -15,6 +15,6 @@ class CppCheckModel(BaseModel):
             description="Comma seperated list of folder to ignore.",
             default=list(IGNORED_FOLDERS))
     define_preprocessor_symbols: Optional[List[str]] = Field(
-            description="Comma seperated list of preprocessor symbols.")
+            default=None, description="Comma seperated list of preprocessor symbols.")
     include_files: Optional[List[str]] = Field(
-            description="Comma seperated list of files to include before check.")
+            default=None, description="Comma seperated list of files to include before check.")

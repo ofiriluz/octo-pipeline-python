@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class WorkspacePipeline(BaseModel):
@@ -10,6 +10,4 @@ class WorkspacePipeline(BaseModel):
     path: str = Field(description="Path of the workspace pipeline")
     executable: bool = Field(description="Executable pipeline")
     external: bool = Field(description="External to pipeline")
-
-    class Config:
-        frozen = True
+    model_config = ConfigDict(frozen=True)
