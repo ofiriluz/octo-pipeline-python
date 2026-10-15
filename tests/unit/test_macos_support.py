@@ -6,7 +6,8 @@ from unittest import mock
 
 import pytest
 
-from octo_pipeline_python.backends.conan.actions.conan_consume import ConanConsume
+from octo_pipeline_python.backends.conan.actions.conan_consume import \
+    ConanConsume
 from octo_pipeline_python.backends.conan.conan_backend import ConanBackend
 from octo_pipeline_python.backends.conan.models import ConanModel
 
