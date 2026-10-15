@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import traceback
 from datetime import datetime
@@ -99,6 +100,35 @@ class ConanBackend(Backend):
         if pipeline_context.name not in conan_client.profile_list():
             logger.info(f"[{pipeline_context.name}][{TAG}] Creating new profile [{pipeline_context.name}]")
             conan_client.create_profile(pipeline_context.name, detect=True)
+        # Conan's bundled settings.yml may not include the detected clang version
+        # (conan 1.66 stops at apple-clang 16 and clang 17).  Widen the list in-place so
+        # that profile configuration does not fail with "Invalid setting".
+        conan_dir = backends_context.attribute(TAG, "conan_dir")
+        settings_yml_path = os.path.join(conan_dir, ".conan", "settings.yml")
+        try:
+            compiler = conan_client.get_profile_key(pipeline_context.name, "settings.compiler")
+            detected_version = conan_client.get_profile_key(
+                pipeline_context.name, "settings.compiler.version")
+            if compiler in ("apple-clang", "clang") and detected_version and os.path.exists(settings_yml_path):
+                with open(settings_yml_path) as f:
+                    content = f.read()
+                # Match the version list of this compiler only (it may span several lines).
+                # The check must be scoped to this list: other compilers in the file
+                # (e.g. intel) list versions such as "17" too, and '^' keeps 'clang:'
+                # from matching inside 'apple-clang:'.
+                match = re.search(rf'^[ \t]*{re.escape(compiler)}:[^\n]*\n\s*version:\s*\[([^\]]*)\]',
+                                  content, re.MULTILINE)
+                if match and f'"{detected_version}"' not in match.group(1):
+                    insert_at = match.end(1)
+                    content = content[:insert_at] + f', "{detected_version}"' + content[insert_at:]
+                    with open(settings_yml_path, "w") as f:
+                        f.write(content)
+                    logger.info(f"[{pipeline_context.name}][{TAG}] "
+                                f"Widened {compiler} version list to include {detected_version}")
+        except Exception as e:
+            logger.warning(f"[{pipeline_context.name}][{TAG}] "
+                           f"Could not widen compiler version list: {e}")
+
         if conan_args.settings:
             # Add settings if set on the arguments
             detected_os = conan_client.get_profile_key(pipeline_context.name, "settings.os")

@@ -11,6 +11,7 @@ from octo_pipeline_python.backends.backend import Backend
 from octo_pipeline_python.backends.backends_context import BackendsContext
 from octo_pipeline_python.backends.conan.models.conan_configuration import \
     ConanConfiguration
+from octo_pipeline_python.backends.conan.models.conan_model import ConanModel
 from octo_pipeline_python.pipeline.pipeline_context import PipelineContext
 from octo_pipeline_python.utils.logger import logger
 from octo_pipeline_python.workspace.workspace_context import WorkspaceContext
@@ -53,11 +54,13 @@ class ConanConsume(Action):
         from octo_pipeline_python.backends.conan import ConanBackend
 
         # Execute conan consumption
+        conan_args: ConanModel = backend.backend_args(backends_context, pipeline_context, workspace_context)
         conan_client: conan_api.Conan = backends_context.attribute(backend.backend_name(), "conan_client")
         allowed_configurations = backends_context.attribute(backend.backend_name(),
                                                             "conan_dir.configurations",
                                                             tag=pipeline_context.name) or [ConanConfiguration.Debug]
         profile = backends_context.attribute(backend.backend_name(), "profile", tag=pipeline_context.name)
+        build_modes = [conan_args.build_policy] if conan_args.build_policy else []
         try:
             results = []
             consumed_packages = defaultdict(dict)
@@ -66,7 +69,8 @@ class ConanConsume(Action):
                 conan_configuration: ConanConfiguration = \
                     ConanConfiguration(configuration)
                 logger.info(f"[{pipeline_context.name}][{backend.backend_name()}] "
-                            f"Consuming [{configuration}] configuration")
+                            f"Consuming [{configuration}] configuration"
+                            + (f" with build policy [{conan_args.build_policy}]" if conan_args.build_policy else ""))
                 conan_conf_dir = backends_context.attribute(backend.backend_name(),
                                                             f"conan_dir.{configuration}",
                                                             tag=pipeline_context.name)
@@ -74,6 +78,7 @@ class ConanConsume(Action):
                                               settings=[f"build_type={conan_configuration.name}"],
                                               profile_names=[profile],
                                               install_folder=conan_conf_dir,
+                                              build=build_modes,
                                               cwd=pipeline_context.source_dir)
                 results.append(result)
 

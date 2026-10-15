@@ -14,3 +14,4 @@ class ConanModel(BaseModel):
     deploy: Optional[str] = Field(default=None, description="Remote to deploy to")
     no_default_remotes: bool = Field(description="Remove conan default remotes", default=False)
     enable_dependency_collision: bool = Field(description="Allow on dependencies version collisions", default=False)
+    build_policy: Optional[str] = Field(default=None, description="Conan build policy passed to install (e.g. 'missing'). None preserves current never-build behaviour.")
