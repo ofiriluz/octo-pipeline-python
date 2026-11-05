@@ -60,7 +60,8 @@ class ConanConsume(Action):
                                                             "conan_dir.configurations",
                                                             tag=pipeline_context.name) or [ConanConfiguration.Debug]
         profile = backends_context.attribute(backend.backend_name(), "profile", tag=pipeline_context.name)
-        build_modes = [conan_args.build_policy] if conan_args.build_policy else []
+        # None means conan's default (download prebuilt binaries, never build). An empty list would mean "build everything".
+        build_modes = [conan_args.build_policy] if conan_args.build_policy else None
         try:
             results = []
             consumed_packages = defaultdict(dict)

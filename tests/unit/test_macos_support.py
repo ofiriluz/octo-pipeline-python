@@ -46,7 +46,7 @@ def test_consume_passes_build_policy_to_conan_install():
 
 
 def test_consume_without_build_policy_keeps_never_build():
-    assert run_consume(None) == []
+    assert run_consume(None) is None
 
 
 # --------------------------------------------------------------------------- clang / apple-clang widening
